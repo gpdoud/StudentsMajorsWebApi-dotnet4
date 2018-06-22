@@ -13,9 +13,18 @@ namespace StudentsMajorsWebApi {
 
 			config.Routes.MapHttpRoute(
 				name: "DefaultApi",
+				routeTemplate: "{controller}/{action}/{id}",
+				defaults: new { action = "List", id = RouteParameter.Optional }
+			);
+
+			config.Routes.MapHttpRoute(
+				name: "CombinedApi",
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
 			);
+
+			config.Formatters.JsonFormatter.SupportedMediaTypes
+				.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
 		}
 	}
 }
